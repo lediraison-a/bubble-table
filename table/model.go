@@ -92,12 +92,17 @@ type Model struct {
 
 	// If true, the table will be multiline
 	multiline bool
+
+	onCellRender func(text string, style lipgloss.Style, rowIndex, colIndex int) string
 }
 
 // New creates a new table ready for further modifications.
 func New(columns []Column) Model {
 	filterInput := textinput.New()
 	filterInput.Prompt = "/"
+	onCellRenderDefault := func(text string, style lipgloss.Style, rowIndex, colIndex int) string {
+		return style.Render(text)
+	}
 	model := Model{
 		columns:        make([]Column, len(columns)),
 		highlightStyle: defaultHighlightStyle.Copy(),
@@ -113,6 +118,8 @@ func New(columns []Column) Model {
 		baseStyle:       lipgloss.NewStyle().Align(lipgloss.Right),
 
 		paginationWrapping: true,
+
+		onCellRender: onCellRenderDefault,
 	}
 
 	// Do a full deep copy to avoid unexpected edits

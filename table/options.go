@@ -436,3 +436,9 @@ func (m Model) WithMultiline(multiline bool) Model {
 
 	return m
 }
+
+func (m Model) WithOnCellRender(onCellRender func(text string, style lipgloss.Style, rowIndex, colIndex int) string) Model {
+	m.onCellRender = onCellRender
+
+	return m
+}
