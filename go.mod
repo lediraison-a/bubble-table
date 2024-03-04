@@ -1,4 +1,4 @@
-module github.com/lediraison-a/bubble-table
+module github.com/evertras/bubble-table
 
 go 1.17
 
