@@ -97,7 +97,7 @@ func (m Model) renderRowColumnData(row Row, column Column, rowStyle lipgloss.Sty
 	cellStyle = cellStyle.Inherit(borderStyle)
 	cellStr := cellStyle.Render(str)
 
-	return cellStr
+	return "#-" + cellStr
 }
 
 func (m Model) renderRow(rowIndex int, last bool) string {
